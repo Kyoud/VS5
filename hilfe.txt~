@@ -1,0 +1,18 @@
+//Compile Thrift
+thrift -gen cpp lamport.thrift
+
+//Compile Server
+g++ lamport_constants.cpp lamport_types.cpp lamportservice.cpp lamportservice_server.skeleton.cpp -o lamport.server -lthrift -std=c++11
+
+//Compile Client
+g++ lamport_constants.cpp lamport_types.cpp lamportservice.cpp ../lamportclient.cpp -o lamport.client -lthrift -std=c++11
+
+//Start Server
+./lamport.server
+
+// Start Client
+./lamport.client
+
+// 100 MB Datei erstellen
+dd if=/dev/zero of=file.txt count=10000 bs=10000
+
